@@ -35,8 +35,8 @@ public function inport($file)
      include('connect.php');
 
 	  	//$value = "'". implode("','", $row)."'";
-	  $q = "INSERT INTO customer(customer_name,address,contact,membership_number,area,root)
-		VALUES('$r3','$r4','$r6','$r1','$r7','$r2')";
+	  $q = "INSERT INTO customer(customer_name,address,contact,membership_number,area,root,type)
+		VALUES('$r3','$r4','$r6','$r1','$r7','$r2','1')";
 	  	if ($this->query($q)) {
 	  		$this->state_csv = true;
 	  	}else{
