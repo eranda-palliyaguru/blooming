@@ -34,7 +34,7 @@ public function inport($file)
 
 	  	//$value = "'". implode("','", $row)."'";
 	  $q = "INSERT INTO customer(customer_name,address,contact,membership_number,area,root)
-		VALUES('$r2','$r3','$r6','$r1','$r7','$r4')";
+		VALUES('$r3','$r4','$r6','$r1','$r7','$r2')";
 	  	if ($this->query($q)) {
 	  		$this->state_csv = true;
 	  	}else{
