@@ -30,6 +30,8 @@ public function inport($file)
 
 
 
+
+
      include('connect.php');
 
 	  	//$value = "'". implode("','", $row)."'";
