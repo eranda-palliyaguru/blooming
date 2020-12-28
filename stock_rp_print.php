@@ -13,15 +13,15 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
-  
+
 	<style>
-th 
+th
 {
   vertical-align: bottom;
   text-align: center;
 }
 
-th span 
+th span
 {
   -ms-writing-mode: tb-rl;
   -webkit-writing-mode: vertical-rl;
@@ -29,8 +29,8 @@ th span
   transform: rotate(180deg);
   white-space: nowrap;
 }
-		
-th h1 
+
+th h1
 {
   -ms-writing-mode: tb-rl;
   -webkit-writing-mode: vertical-rl;
@@ -51,11 +51,11 @@ th h1
 <?php
 include("connect.php");
 $sec = "1";
-	
+
 $d1=$_GET['d1'];
 				$d2=$_GET['d2'];
 				//$cus=$_GET['cus'];
-?><meta http-equiv="refresh" content="<?php echo $sec;$d1=$_GET['d1'];?>;URL='stock_rp.php?d1=<?php echo $d1;?>&d2=<?php echo $d2;?>'">	
+?><meta http-equiv="refresh" content="<?php echo $sec;$d1=$_GET['d1'];?>;URL='stock_rp.php?d1=<?php echo $d1;?>&d2=<?php echo $d2;?>'">
 <div class="wrapper">
   <!-- Main content -->
   <section class="invoice">
@@ -63,53 +63,58 @@ $d1=$_GET['d1'];
     <div class="row">
       <div class="col-xs-12">
         <h2 class="page-header">
-          <i class="fa fa-globe"></i> HTJT Holdings (PVT)LTD.
-		  
-          <small class="pull-right">Date:<?php date_default_timezone_set("Asia/Colombo"); 
+          <i class="fa fa-globe"></i> <?php  $result = $db->prepare("SELECT * FROM info");
+           $result->bindParam(':userid', $date);
+          				 $result->execute();
+          				 for($i=0; $row = $result->fetch(); $i++){
+          					 echo $row['name']."<br>";
+          					}?>
+
+          <small class="pull-right">Date:<?php date_default_timezone_set("Asia/Colombo");
 	                                                        echo date("Y-m-d____h:ia")  ?></small>
         </h2>
 		<h4>
 			Stock
-		<?php echo "FROM- ".$_GET['d1']." TO- ".$_GET['d2']; ?> 
+		<?php echo "FROM- ".$_GET['d1']." TO- ".$_GET['d2']; ?>
 		<h4>
       </div>
       <!-- /.col -->
     </div>
     <!-- info row -->
-    
+
     <!-- /.row -->
 <div class="box-body">
        	   <table id="example1" class="table table-bordered table-striped">
                 <thead>
-				
+
                 <tr>
-				  
-                  
-                
+
+
+
                   <th colspan="4" ></th>
 				   <th colspan="2" >12.5kg</th>
 				   <th colspan="2" >5kg</th>
 				    <th colspan="2" >37.5kg</th>
-					
+
 					<th colspan="2" >2kg</th>
 				   <?php
 				  $qty=0;
-			
-				$result1 = $db->prepare("SELECT * FROM products WHERE  product_id>='9' ORDER by product_id ASC");				
+
+				$result1 = $db->prepare("SELECT * FROM products WHERE  product_id>='9' ORDER by product_id ASC");
 				$result1->bindParam(':userid', $d2);
                 $result1->execute();
                 for($i=0; $row = $result1->fetch(); $i++){
 	            $id=$row['product_id'];
-				
-	
+
+
 			?>
 				  <th  style="" ><span> <?php echo $row['gen_name']; ?></span></th>
 				   <?php } ?>
-					
-					
-                  
+
+
+
                 </tr>
-				
+
 				<tr>
 				<th>ID</th>
 				<th>Date</th>
@@ -125,28 +130,28 @@ $d1=$_GET['d1'];
 				    <th  >R</th>
 					<?php
 				  $qty=0;
-				
-				
-				$result1 = $db->prepare("SELECT * FROM products WHERE  product_id>='9' ORDER by product_id ASC");				
+
+
+				$result1 = $db->prepare("SELECT * FROM products WHERE  product_id>='9' ORDER by product_id ASC");
 				$result1->bindParam(':userid', $d2);
                 $result1->execute();
                 for($i=0; $row = $result1->fetch(); $i++){
 	            $id=$row['product_id'];
-				
-	
+
+
 			?>
 				   <th></th>
-				
+
 				   <?php } ?>
-				
+
 				</tr>
-				
+
                 </thead>
                 <tbody>
 				<?php
 	    date_default_timezone_set("Asia/Colombo");
 		$hh=date("Y/m/d");
-		$tot=0;	$tot_f=0;		
+		$tot=0;	$tot_f=0;
 				$d1=$_GET['d1'];
 				$d2=$_GET['d2'];
 				//$cus_id=$_GET['cus'];
@@ -154,123 +159,123 @@ $d1=$_GET['d1'];
 				//$d3=$_GET['d3'];
 
 	$result2 = $db->prepare("SELECT * FROM loading WHERE  date BETWEEN '$d1' and '$d2' ORDER by transaction_id DESC");
-	
+
 	$cus=">0";
 
-					
 
-				
+
+
 					$result2->bindParam(':userid', $d2);
                 $result2->execute();
                 for($i=0; $row2 = $result2->fetch(); $i++){
 				$invo=$row2['transaction_id'];
-	
-	
 
-				
-				
+
+
+
+
 			?>
                 <tr>
-				
+
 				<td><?php echo $row2['transaction_id'];?></td>
 				<td><?php echo $row2['date'];?></td>
                   <td><?php echo $row2['lorry_no'];?></td>
-					<td><?php 			
-				$dri=$row2['driver'];	
+					<td><?php
+				$dri=$row2['driver'];
 			$result = $db->prepare("SELECT * FROM employee WHERE  id='$dri'  ");
-				
+
 					$result->bindParam(':userid', $d1);
                 $result->execute();
-                for($i=0; $row = $result->fetch(); $i++){	
+                for($i=0; $row = $result->fetch(); $i++){
 		 	 echo $row['name'];
 				}
 			?></td>
-				  
+
  <?php
 				  $ter=4;
-			
+
 				for($pro_id1 = 0; $pro_id1 < (int)$ter; $pro_id1++) {
 	            $pro_id=$pro_id1+1;
 				$pro_id_e=$pro_id1+5;
 			?>
-				   
-				     
-				  
-				<td><?php 			
-					
+
+
+
+				<td><?php
+
 			$result = $db->prepare("SELECT * FROM loading_list WHERE  loading_id='$invo' and product_code='$pro_id_e' ");
-				
+
 					$result->bindParam(':userid', $d1);
                 $result->execute();
-                for($i=0; $row = $result->fetch(); $i++){	
+                for($i=0; $row = $result->fetch(); $i++){
 		 	 echo $row['qty']."(".$row['unload_qty'].")";
 				}
 			?></td>
-	<td><?php 			
-					
+	<td><?php
+
 			$result = $db->prepare("SELECT * FROM  loading_list WHERE  loading_id='$invo' and product_code='$pro_id' ");
-				
+
 					$result->bindParam(':userid', $d1);
                 $result->execute();
-                for($i=0; $row = $result->fetch(); $i++){	
+                for($i=0; $row = $result->fetch(); $i++){
 			 echo $row['qty']."(".$row['unload_qty'].")";
 				}
 			?></td>
 					<?php } ?>
 <?php
 				  $ter1=7;
-			
+
 				for($pro_id2 = 0; $pro_id2 < (int)$ter1; $pro_id2++) {
 	            $pro_id=$pro_id2+9;
-				
+
 			?>
-				   
-				     
-				  
-				<td><?php 			
-					
+
+
+
+				<td><?php
+
 			$result = $db->prepare("SELECT * FROM  loading_list WHERE  loading_id='$invo' and product_code='$pro_id' ");
-				
+
 					$result->bindParam(':userid', $d1);
                 $result->execute();
-                for($i=0; $row = $result->fetch(); $i++){	
+                for($i=0; $row = $result->fetch(); $i++){
 		  echo $row['qty']." (".$row['unload_qty'].")";
 				}
 			?></td>
 
 					<?php } ?>
-			<td></td><td></td>		
-		<?php 			
-	
+			<td></td><td></td>
+		<?php
+
 		 $type= 0;
 		$ch_date=0;
-			
-			?>			
-		
-				
-				
-				
-				
+
+			?>
+
+
+
+
+
 				</tr>
-					
+
 
     <?php
 $tot+=$row2['driver'];
 $tot_f+=$row2['driver'];
 
 				}
-			?>            
+			?>
                 </tbody>
-				
 
-              </table>  
+
+              </table>
 	<br><br> <center>
 	<h4>............... <br> Stock keeper</h4></center>
-		 </div> 
+		 </div>
         </div>
-      
+
       <!-- /.col -->
-    
+
     <!-- /.row -->
   </section>
   <!-- /.content -->

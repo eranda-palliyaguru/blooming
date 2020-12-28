@@ -57,7 +57,14 @@ $d1=$_GET['d1'];
     <div class="row">
       <div class="col-xs-12">
         <h2 class="page-header">
-          <i class="fa fa-globe"></i> Thimal Enterprises (Pvt.) Ltd
+          <i class="fa fa-globe"></i> <?php  $result = $db->prepare("SELECT * FROM info");
+           $result->bindParam(':userid', $date);
+          				 $result->execute();
+          				 for($i=0; $row = $result->fetch(); $i++){
+          					 echo $row['name']."<br>";
+
+
+          					}?>
 
           <small class="pull-right">Date:<?php date_default_timezone_set("Asia/Colombo");
 	                                                        echo date("Y-m-d____h:ia")  ?></small>
