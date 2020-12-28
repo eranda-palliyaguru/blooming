@@ -50,9 +50,18 @@ $sec = "1";
         <div class="col-xs-6"><a href="sales2.php" style="font-size: 2px">
             <img src="gas.jpg" width="250" alt=""><BR>
 
-	  <h5>Thimal Enterprises (Pvt.) Ltd <br>
-	 33B/1 Katuwawala, Boralasgamuwa <br>
-	 011-2 509 801<br>
+	  <h5>
+<?php  $result = $db->prepare("SELECT * FROM info");
+ $result->bindParam(':userid', $date);
+				 $result->execute();
+				 for($i=0; $row = $result->fetch(); $i++){
+					 echo $row['name']."<br>";
+					 echo $row['address']."<br>";
+					  echo $row['phone_no']." / ".$row['phone_no2']."<br>";
+
+					}?>
+
+
 		  <b>Invoice no.<?php echo $invo; ?> </b><br>
 	<br>
 		  Date:<?php date_default_timezone_set("Asia/Colombo");
