@@ -3,14 +3,14 @@ session_start();
 include('connect.php');
 date_default_timezone_set("Asia/Colombo");
 
-$result = $db->prepare("SELECT * FROM customer WHERE area='Kurunegala' ");
+$result = $db->prepare("SELECT * FROM customer WHERE area='Puttalam' ");
 $result->bindParam(':userid', $res);
 $result->execute();
 for($i=0; $row = $result->fetch(); $i++){
 $id=$row['customer_id'];
 
 
-$name=2;
+$name=3;
 
 $sql = "UPDATE customer
         SET area_id=?
