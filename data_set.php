@@ -3,7 +3,7 @@ session_start();
 include('connect.php');
 date_default_timezone_set("Asia/Colombo");
 
-$result = $db->prepare("SELECT * FROM customer WHERE area="Gampaha" ");
+$result = $db->prepare("SELECT * FROM customer WHERE area='Gampaha' ");
 $result->bindParam(':userid', $res);
 $result->execute();
 for($i=0; $row = $result->fetch(); $i++){
