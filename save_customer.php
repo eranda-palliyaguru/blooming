@@ -16,8 +16,8 @@ $acc_name = $_POST['acc_name'];
 
 
 
-$result = $db->prepare("SELECT * FROM  WHERE  id= :userid ");
-$result->bindParam(':userid', $g);
+$result = $db->prepare("SELECT * FROM area WHERE  id= :userid ");
+$result->bindParam(':userid', $area_id);
 $result->execute();
 for($i=0; $row = $result->fetch(); $i++){
 $area_name=$row['name'];
